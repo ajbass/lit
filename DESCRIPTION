@@ -1,0 +1,27 @@
+Package: lit
+Type: Package
+Title: Latent Interaction Testing for Genome-wide Studies
+Version: 0.0.0.99
+Authors@R: c(person("Andrew", "Bass", email ="ajbass@emory.edu", role = c("aut", "cre")),
+             person("Michael", "Epstein", email ="mpepste@emory.edu", role = c("aut")))
+Maintainer: Andrew Bass <ajbass@emory.edu>
+Description: Identifying latent genetic interactions in genome-wide association studies
+    using the Latent Interaction Testing (LIT) framework.
+    LIT is a flexible kernel-based approach that leverages information across
+    multiple traits to detect latent genetic interactions without specifying or
+    observing the interacting variable (e.g., environment). LIT is also 
+    computationally scalable for biobank-scale datasets.
+URL: http://github.com/ajbass/lit
+License: LGPL
+Encoding: UTF-8
+VignetteBuilder: knitr
+LazyData: true
+RoxygenNote: 7.2.3
+LinkingTo: Rcpp, RcppArmadillo, RcppEigen
+Imports: Rcpp,
+         genio,
+         CompQuadForm
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown

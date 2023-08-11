@@ -1,0 +1,97 @@
+---
+title: "lit Package Vignette"
+author: "Andrew J. Bass and Michael P. Epstein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{LIT: Latent Interaction Testing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+The `lit` package implements a flexible kernel-based multivariate testing procedure, called Latent Interaction Testing (LIT), to detect latent genetic interactions in a genome-wide association study.
+When analyzing GWAS data, a few important questions are
+
+- Which SNPs are associated with one (or many) traits?
+- What role does the environment play in explaining trait variability?
+- Is there evidence of interaction effects (e.g., gene-by-gene or gene-by-environment interactions)?
+
+However, the last two questions are very difficult to answer because effect sizes of interactions are likely small, interactive variables are unknown, and there's often a large multiple testing burden.
+
+One way to help address this gap is to use a variance-based testing procedure which does not require the interactive variable(s) to be specified or observed. 
+These procedures  can detect any unequal residual trait variation among genotype categories at a specific SNP (i.e., heteroskedasticity), which could suggest an unobserved (or latent) genetic interaction.
+However, researchers apply such procedures on a trait-by-trait basis and ignore any biological pleiotropy among traits. In fact, it is simple to show that a latent genetic interaction not only induces a variance effect but also a covariance effect between traits, and these covariance patterns can be harnessed to improve the statistical power. 
+
+The `lit` package leverages both the differential variance _and_ differential covariance patterns to substantially increase power to detect latent genetic interactions in a GWAS. In particular, LIT assesses whether the trait variances/covariances vary as a function of genotype using a kernel-based distance covariance (KDC) framework.
+As we show in our work, LIT often provides substantial increases in power compared to trait-by-trait univariate approaches, in part because LIT uses shared information (i.e., pleiotropy) across tests and does not require a multiple testing correction which negatively impacts power.
+
+Note that this package is currently under development. Additional software improvements and documentation will be added in the future. See our manuscript for additional details:
+
+> Bass AJ, Bian S, Wingo AP, Wingo TS, Culter DJ, Epstein MP. Identifying latent genetic interactions in genome-wide association studies using multiple traits. *Submitted*; 2023.
+
+## Installation
+
+```{r, eval = FALSE}
+install.packages("devtools")
+library("devtools")
+# install package
+devtools::install_github("ajbass/lit")
+```
+
+## Quick start
+
+We provide two ways to use the `lit` package. For small GWAS datasets where the genotypes can be loaded in R, the `lit()` function can be used:
+
+```{r}
+library(lit)
+# set seed
+set.seed(123)
+
+# generate SNPs and traits
+X <- matrix(rbinom(10 * 10, size = 2, prob = 0.25), ncol = 10)
+Y <- matrix(rnorm(10 * 4), ncol = 4)
+
+# test for latent genetic interactions
+out <- lit(Y, X)
+head(out)
+```
+
+The output is a data frame of $p$-values where the rows are SNPs and the columns are different implementations of LIT to test for latent genetic interactions: the first column (`wlit`) uses a linear kernel, the second column (`ulit`) uses a projection kernel, and the third column (`alit`) maximizes the number of discoveries by combining the $p$-values of the linear and projection kernels. 
+
+For large GWAS datasets (e.g., biobank-sized), the `lit()` function is not computationally feasible. Instead, the `lit_plink()` function can be applied directly to plink files. To demonstrate how to use the function, we use the example plink files from the `genio` package:
+
+```{r}
+# load genio package
+library(genio)
+
+# path to plink files
+file <- system.file("extdata", 'sample.bed', package = "genio", mustWork = TRUE)
+
+# generate trait expression
+Y <- matrix(rnorm(10 * 4), ncol = 4)
+
+# apply lit to plink file
+out <- lit_plink(Y, file = file, verbose = FALSE)
+head(out)
+```
+
+See `?lit` and `?lit_plink` for additional details and input arguments.
+
+Note that a marginal testing procedure for latent genetic interactions based on the squared residuals and cross products (Marginal (SQ/CP)) can also be implemented using the `marginal` and `marginal_plink` functions: 
+
+```{r, eval = FALSE}
+# apply Marginal (SQ/CP) to loaded genotypes
+out <- marginal(Y, X)
+
+# apply Marginal (SQ/CP) to plink file
+out <- marginal_plink(Y, file = file, verbose = FALSE)
+```
