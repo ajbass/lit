@@ -13,7 +13,11 @@ status](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.sv
 The `lit` package implements a kernel-based multivariate testing
 procedure, called Latent Interaction Testing (LIT), to test for latent
 genetic interactions in genome-wide association studies. See our
-manuscript for additional details.
+manuscript for additional details:
+
+> Bass AJ, Bian S, Wingo AP, Wingo TS, Culter DJ, Epstein MP.
+> Identifying latent genetic interactions in genome-wide association
+> studies using multiple traits. *Submitted*; 2023.
 
 ## Installation
 
