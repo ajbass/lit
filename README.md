@@ -3,8 +3,6 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/ajbass/lit/)
 [![R-CMD-check](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml)
 <!-- badges: end -->
 
