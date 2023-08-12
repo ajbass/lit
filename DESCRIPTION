@@ -9,8 +9,8 @@ Description: Identifying latent genetic interactions in genome-wide association 
     using the Latent Interaction Testing (LIT) framework.
     LIT is a flexible kernel-based approach that leverages information across
     multiple traits to detect latent genetic interactions without specifying or
-    observing the interacting variable (e.g., environment). LIT is also 
-    computationally scalable for biobank-scale datasets.
+    observing the interacting variable (e.g., environment). LIT accepts
+    standard PLINK files as inputs to analyze large genome-wide association studies.
 URL: https://github.com/ajbass/lit
 License: LGPL
 Encoding: UTF-8
@@ -18,7 +18,7 @@ VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 7.2.3
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
-Imports: Rcpp,
+Imports: Rcpp (>= 1.0.11),
          genio,
          CompQuadForm
 Suggests: 
