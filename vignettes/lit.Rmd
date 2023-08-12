@@ -19,31 +19,33 @@ knitr::opts_chunk$set(
 ## Overview
 
 The `lit` package implements a flexible kernel-based multivariate testing procedure, called Latent Interaction Testing (LIT), to detect latent genetic interactions in a genome-wide association study.
-When analyzing GWAS data, a few important questions are
+In a standard GWAS analysis, one typically attempts to determine which SNPs are associated with one (or many) traits. Another important question is 
 
-- Which SNPs are associated with one (or many) traits?
-- What role does the environment play in explaining trait variability?
-- Is there evidence of interaction effects (e.g., gene-by-gene or gene-by-environment interactions)?
+- Do any SNPs demonstrate any interactive effects, e.g., gene-by-gene or gene-by-environment interactions?
 
-However, the last two questions are very difficult to answer because effect sizes of interactions are likely small, interactive variables are unknown, and there's often a large multiple testing burden.
+<!--to understand the genetic architecture-->
 
-One way to help address this gap is to use a variance-based testing procedure which does not require the interactive variable(s) to be specified or observed. 
-These procedures  can detect any unequal residual trait variation among genotype categories at a specific SNP (i.e., heteroskedasticity), which could suggest an unobserved (or latent) genetic interaction.
+This question has been very difficult to answer because effect sizes of interactions are likely small, interactive variables are unknown, and there's often a large multiple testing burden from testing many candidate interactive variables.
+ 
+One way to help address some of these issues is to use a variance-based testing procedure which does not require the interactive variable(s) to be specified or observed. 
+These procedures can detect any unequal residual trait variation among genotype categories at a specific SNP (i.e., heteroskedasticity), which could suggest an unobserved (or latent) genetic interaction.
 However, researchers apply such procedures on a trait-by-trait basis and ignore any biological pleiotropy among traits. In fact, it is simple to show that a latent genetic interaction not only induces a variance effect but also a covariance effect between traits, and these covariance patterns can be harnessed to improve the statistical power. 
 
-The `lit` package leverages both the differential variance _and_ differential covariance patterns to substantially increase power to detect latent genetic interactions in a GWAS. In particular, LIT assesses whether the trait variances/covariances vary as a function of genotype using a kernel-based distance covariance (KDC) framework.
-As we show in our work, LIT often provides substantial increases in power compared to trait-by-trait univariate approaches, in part because LIT uses shared information (i.e., pleiotropy) across tests and does not require a multiple testing correction which negatively impacts power.
+The `lit` package addresses this gap by leveraging both the differential variance _and_ differential covariance patterns to substantially increase power to detect latent genetic interactions in a GWAS. In particular, LIT assesses whether the trait variances/covariances vary as a function of genotype using a kernel-based distance covariance (KDC) framework.
+LIT often provides substantial increases in power compared to trait-by-trait univariate approaches, in part because LIT uses shared information (i.e., pleiotropy) across tests and does not require a multiple testing correction which negatively impacts power.
 
-Note that this package is currently under development. Additional software improvements and documentation will be added in the future. See our manuscript for additional details:
+Note that this package contains the core functionality for the methods described in
 
 > Bass AJ, Bian S, Wingo AP, Wingo TS, Culter DJ, Epstein MP. Identifying latent genetic interactions in genome-wide association studies using multiple traits. *Submitted*; 2023.
+
+Additional software features will be added in the future. 
 
 ## Installation
 
 ```{r, eval = FALSE}
+# install development version of package
 install.packages("devtools")
 library("devtools")
-# install package
 devtools::install_github("ajbass/lit")
 ```
 
