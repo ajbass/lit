@@ -26,6 +26,10 @@ library("devtools")
 devtools::install_github("ajbass/lit")
 ```
 
+Our package requires `gfortran` to be installed. See the answer
+[here](https://stackoverflow.com/questions/69639782/installing-gfortran-on-macbook-with-apple-m1-chip-for-use-in-r)
+for details on installing `gfortran`.
+
 The vignette can be viewed by typing:
 
 ``` r
@@ -34,9 +38,8 @@ browseVignettes(package = "lit")
 
 ## Quick start
 
-We provide two ways to use the `lit` package. For small GWAS datasets
-where the genotypes can be loaded in R, the `lit()` function can be
-used:
+We provide two ways to use the `lit` package. When the genotypes can be
+loaded in R (small GWAS datasets), the `lit()` function can be used:
 
 ``` r
 library(lit)
