@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # GNU General Public License
 
 *Version 3, 29 June 2007*\
