@@ -4,6 +4,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lit)](https://cran.r-project.org/package=lit)
+
 <!-- badges: end -->
 
 ## Overview

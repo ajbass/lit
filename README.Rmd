@@ -13,8 +13,11 @@ knitr::opts_chunk$set(
 ```
 
 # Latent Interaction Testing (LIT)
+
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml)
+
+[![R-CMD-check](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/ajbass/lit/actions/workflows/R-CMD-check.yml) [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lit)](https://cran.r-project.org/package=lit)
+
 <!-- badges: end -->
 
 ## Overview
@@ -32,11 +35,11 @@ library("devtools")
 devtools::install_github("ajbass/lit")
 ```
 
-Note that our package requires `gfortran` to be installed. If you run into issues with `gfortran`, see the answer [here](https://stackoverflow.com/questions/69639782/installing-gfortran-on-macbook-with-apple-m1-chip-for-use-in-r) for additional details. 
+Note that our package requires `gfortran` to be installed. If you run into issues with `gfortran`, see the answer [here](https://stackoverflow.com/questions/69639782/installing-gfortran-on-macbook-with-apple-m1-chip-for-use-in-r) for additional details.
 
 The vignette can be viewed by typing:
 
-```R
+``` r
 browseVignettes(package = "lit")
 ```
 
@@ -58,7 +61,7 @@ out <- lit(Y, X)
 head(out)
 ```
 
-The output is a data frame of p-values where the rows are SNPs and the columns are different implementations of LIT to test for latent genetic interactions: the first column (`wlit`) uses a linear kernel, the second column (`ulit`) uses a projection kernel, and the third column (`alit`) maximizes the number of discoveries by combining the p-values of the linear and projection kernels. 
+The output is a data frame of p-values where the rows are SNPs and the columns are different implementations of LIT to test for latent genetic interactions: the first column (`wlit`) uses a linear kernel, the second column (`ulit`) uses a projection kernel, and the third column (`alit`) maximizes the number of discoveries by combining the p-values of the linear and projection kernels.
 
 For large GWAS datasets (e.g., biobank-sized), the `lit()` function is not computationally feasible. Instead, the `lit_plink()` function can be applied directly to plink files. To demonstrate how to use the function, we use the example plink files from the `genio` package:
 
@@ -79,7 +82,7 @@ head(out)
 
 See `?lit` and `?lit_plink` for additional details and input arguments.
 
-Note that a marginal testing procedure for latent genetic interactions based on the squared residuals and cross products (Marginal (SQ/CP)) can also be implemented using the `marginal` and `marginal_plink` functions: 
+Note that a marginal testing procedure for latent genetic interactions based on the squared residuals and cross products (Marginal (SQ/CP)) can also be implemented using the `marginal` and `marginal_plink` functions:
 
 ```{r, eval = FALSE}
 # apply Marginal (SQ/CP) to loaded genotypes
@@ -89,7 +92,7 @@ out <- marginal(Y, X)
 out <- marginal_plink(Y, file = file, verbose = FALSE)
 ```
 
-
+```{=html}
 <!---
 The columns represent the cross products, e.g., `col1_col2` is the cross product of the first trait multiplied by the second trait (adjusting for the additive genetic effect)). See our preprint for additional details on this approach.
 
@@ -99,3 +102,4 @@ List of vario
 NA's in phenotypes.
 
 -->
+```
