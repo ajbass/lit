@@ -1,5 +1,5 @@
 
-# Latent Interaction Testing (LIT)
+# lit
 
 <!-- badges: start -->
 
@@ -21,23 +21,33 @@ manuscript for additional details:
 
 ## Installation
 
+This software is implemented in the `R` statistical programming
+language. To install the release version, type the following in the `R`
+terminal:
+
 ``` r
-install.packages("devtools")
-library("devtools")
-# install package
-devtools::install_github("ajbass/lit")
+# release version
+install.packages("lit")
 ```
 
-Note that our package requires `gfortran` to be installed. If you run
-into issues with `gfortran`, see the answer
-[here](https://stackoverflow.com/questions/69639782/installing-gfortran-on-macbook-with-apple-m1-chip-for-use-in-r)
-for additional details.
+The development version of `lit` can be installed using the following
+code:
+
+``` r
+# install devtools
+install.packages("devtools")
+devtools::install_github("ajbass/lit")
+```
 
 The vignette can be viewed by typing:
 
 ``` r
 browseVignettes(package = "lit")
 ```
+
+If you run into issues with `gfortran` on Mac, see the answer
+[here](https://stackoverflow.com/questions/69639782/installing-gfortran-on-macbook-with-apple-m1-chip-for-use-in-r)
+for additional details.
 
 ## Quick start
 
@@ -49,9 +59,11 @@ library(lit)
 # set seed
 set.seed(123)
 
-# generate SNPs and traits
+# generate 10 SNPs for 10 individuals
 X <- matrix(rbinom(10 * 10, size = 2, prob = 0.25), ncol = 10)
-Y <- matrix(rnorm(10 * 4), ncol = 4)
+
+# generate 4 phenotypes for 10 individuals
+Y <- matrix(rnorm(10 * 4), ncol = 4) 
 
 # test for latent genetic interactions
 out <- lit(Y, X)
@@ -67,15 +79,20 @@ head(out)
 
 The output is a data frame of p-values where the rows are SNPs and the
 columns are different implementations of LIT to test for latent genetic
-interactions: the first column (`wlit`) uses a linear kernel, the second
-column (`ulit`) uses a projection kernel, and the third column (`alit`)
-maximizes the number of discoveries by combining the p-values of the
-linear and projection kernels.
+interactions:
+
+- `wlit` uses a linear kernel to measure pairwise similarity for the
+  genotype and trait matrices
+- `ulit` uses a projection kernel to measure pairwise similarity for the
+  genotype and trait matrices
+- `alit` combines the p-values of `wlit` and `ulit` using a Cauchy
+  combination test to maximize the number of discoveries
 
 For large GWAS datasets (e.g., biobank-sized), the `lit()` function is
-not computationally feasible. Instead, the `lit_plink()` function can be
-applied directly to plink files. To demonstrate how to use the function,
-we use the example plink files from the `genio` package:
+not computationally feasible because the genotypes cannot be loaded in
+`R`. Instead, the `lit_plink()` function can be applied directly to
+plink files. To demonstrate how to use the function, we use the example
+plink files from the `genio` package:
 
 ``` r
 # load genio package
