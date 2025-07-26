@@ -17,7 +17,7 @@ manuscript for additional details:
 
 > Bass AJ, Bian S, Wingo AP, Wingo TS, Culter DJ, Epstein MP.
 > Identifying latent genetic interactions in genome-wide association
-> studies using multiple traits. *Submitted*; 2023.
+> studies using multiple traits. Genome Medicine; 2024.
 
 ## Installation
 
