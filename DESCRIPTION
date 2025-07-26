@@ -1,7 +1,7 @@
 Package: lit
 Type: Package
 Title: Latent Interaction Testing for Genome-Wide Studies
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(person("Andrew", "Bass", email ="ajbass@emory.edu", role = c("aut", "cre")),
              person("Michael", "Epstein", email ="mpepste@emory.edu", role = c("aut")))
 Maintainer: Andrew Bass <ajbass@emory.edu>
