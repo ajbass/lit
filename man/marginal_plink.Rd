@@ -25,7 +25,7 @@ and the rows are SNPs.
 The \code{marginal_plink} function performs a trait-by-trait univariate test for latent interactions
 using the squared residuals and cross products. This function is suitable for large
 datasets (e.g., UK Biobank) in plink format. Note that our code to process plink files builds from the
-\code{\link{genio}} R package.
+\code{genio} R package.
 }
 \examples{
 # set seed

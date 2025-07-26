@@ -35,7 +35,7 @@ Currently, we implement the linear and projection kernel functions to measure pa
 We then combine the p-values of these implementations using a Cauchy combination test to maximize the number of discoveries.
 This function is suitable for large  datasets (e.g., UK Biobank) in plink format.
  Note that our code to process plink files builds from the
-\code{\link{genio}} R package
+\code{genio} R package
 }
 \examples{
 # set seed

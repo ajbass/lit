@@ -24,7 +24,7 @@ and the rows are SNPs.
 \description{
 The \code{GAMuT} function is a kernel-based multivariate association test.
 Note that our code to process plink files builds from the
-\code{\link{genio}} R package.
+\code{genio} R package.
 }
 \examples{
 # set seed
